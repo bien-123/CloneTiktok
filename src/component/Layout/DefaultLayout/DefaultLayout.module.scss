@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex; // cho ngang hàng
+    flex-direction: column; // cho 2 cái về cột
+    align-items: center;
+}
+
+.container {
+    width: var(--default-layout-witdh);
+    padding: 0 var(--default-layout-horizontal-spacer);
+    display: flex;
+}
+
+.content {
+    flex: 1; //chiếm hết khoảng ko còn lại
+}
