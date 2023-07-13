@@ -1,4 +1,8 @@
 .wrapper {
+    //nội dung chỉ hiện trong flex, ko bị tràn
+    display: flex;
+    flex-direction: column;
+
     width: 100%;
     max-height: min((100vh - 96px) - 60px, 734px);
     min-height: 100px;

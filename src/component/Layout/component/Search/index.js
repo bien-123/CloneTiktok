@@ -86,59 +86,64 @@ function Search() {
         const searchValueChange = e.target.value;
 
         // nếu searchValueChange ko bắt đầu bằng dấu cách thì cho nhập ký tự
-        if (!searchValueChange.startsWitdh('')) {
+        if (!searchValueChange.startsWith(' ')) {
             setSearchValue(searchValueChange);
         }
     };
 
     return (
-        <HeadlessTippy
-            // content="Tìm kiếm" placement="right"
-            visible={showResult && searchResult.length > 0} //nếu kết quả tìm kiếm lớn hơn ko thì mới hiện
-            interactive //để tương tác đc vs kqua tìm kiếm
-            render={(attrs) => (
-                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                    {/* //search-result kế thừa độ rộng của search */}
-                    <PopperWrapper>
-                        <h4 className={cx('search-title')}>Accounts</h4>
-                        {searchResult.map((result) => (
-                            <AccountItem key={result.id} data={result} />
-                        ))}
-                        {/* <AccountItem /> */}
-                    </PopperWrapper>
-                </div>
-            )}
-            // ẩn kết quả Search khi click ra ngoài
-            onClickOutside={handleHideResult}
-        >
-            <div className={cx('search')}>
-                <input
-                    ref={inputRef}
-                    value={searchValue}
-                    placeholder="Search account and video"
-                    spellCheck="false"
-                    onChange={handleChange}
-                    onFocus={() => setShowResult(true)}
-                ></input>
-
-                {/* chuyển searchValue sang giá trị bolean: nếu có searchValue và ko có loading thì mới hiện button clear */}
-                {!!searchValue && !loading && (
-                    <button className={cx('clear')} onClick={handleClear}>
-                        {/* Clear */}
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                    </button>
+        // Using a wapper <div> or<span> tag around the reference element solves
+        // this by creating a new parentNode context.
+        <div>
+            <HeadlessTippy
+                // content="Tìm kiếm" placement="right"
+                interactive //để tương tác đc vs kqua tìm kiếm
+                appendTo={() => document.body} //Fix warning thư viện Tippy
+                visible={showResult && searchResult.length > 0} //nếu kết quả tìm kiếm lớn hơn ko thì mới hiện
+                render={(attrs) => (
+                    <div className={cx('search-result')} tabIndex="-1" {...attrs}>
+                        {/* //search-result kế thừa độ rộng của search */}
+                        <PopperWrapper>
+                            <h4 className={cx('search-title')}>Accounts</h4>
+                            {searchResult.map((result) => (
+                                <AccountItem key={result.id} data={result} />
+                            ))}
+                            {/* <AccountItem /> */}
+                        </PopperWrapper>
+                    </div>
                 )}
+                // ẩn kết quả Search khi click ra ngoài
+                onClickOutside={handleHideResult}
+            >
+                <div className={cx('search')}>
+                    <input
+                        ref={inputRef}
+                        value={searchValue}
+                        placeholder="Search account and video"
+                        spellCheck="false"
+                        onChange={handleChange}
+                        onFocus={() => setShowResult(true)}
+                    ></input>
 
-                {/* Loading */}
-                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
+                    {/* chuyển searchValue sang giá trị bolean: nếu có searchValue và ko có loading thì mới hiện button clear */}
+                    {!!searchValue && !loading && (
+                        <button className={cx('clear')} onClick={handleClear}>
+                            {/* Clear */}
+                            <FontAwesomeIcon icon={faCircleXmark} />
+                        </button>
+                    )}
 
-                <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
-                    {/* Search */}
-                    {/* <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon> */}
-                    <SearchIcon />
-                </button>
-            </div>
-        </HeadlessTippy>
+                    {/* Loading */}
+                    {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
+
+                    <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
+                        {/* Search */}
+                        {/* <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon> */}
+                        <SearchIcon />
+                    </button>
+                </div>
+            </HeadlessTippy>
+        </div>
     );
 }
 

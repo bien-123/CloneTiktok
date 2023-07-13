@@ -42,7 +42,7 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
 
     return (
         <Tippy
-            // visible//để hiển thị menu = display:block
+            // visible //để hiển thị menu = display:block
             offset={[12, 8]}
             hideOnClick={hideOnClick}
             interactive //để tương tác đc vs kqua tìm kiếm
@@ -60,7 +60,7 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
                                 }}
                             />
                         )}
-                        {renderItems()}
+                        <div className={cx('menu-body')}>{renderItems()}</div>
                     </PopperWrapper>
                 </div>
             )}
