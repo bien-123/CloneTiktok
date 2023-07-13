@@ -12,7 +12,7 @@ const cx = classNames.bind(styles);
 const defaultFn = () => {};
 
 //  onChange=defaultFn: gán bằng function rỗng, nếu onChange ko có gtri truyền từ bên ngoài vào thì nó lấy function rỗng=> onChange(item) ko bị lỗi
-function Menu({ children, items = [], onChange = defaultFn }) {
+function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1]; //lấy phần tử cuối mảng
 
@@ -44,6 +44,7 @@ function Menu({ children, items = [], onChange = defaultFn }) {
         <Tippy
             // visible//để hiển thị menu = display:block
             offset={[12, 8]}
+            hideOnClick={hideOnClick}
             interactive //để tương tác đc vs kqua tìm kiếm
             delay={[0, 700]} //delay 7s sau khi hover vào sẽ ẩn đi
             placement="bottom-end"

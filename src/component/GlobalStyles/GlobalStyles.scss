@@ -8,6 +8,8 @@
     --white: #fff;
     --text-color: #161823;
 
+    --font-family: 'ProximaNova', sans-serif;
+
     //Default layout
     --default-layout-header-heitht: 60px;
     --default-layout-witdh: 1150px;
@@ -26,7 +28,7 @@ html {
 
 body {
     // font-family: 'Montserrat', sans-serif;
-    font-family: 'ProximaNova', sans-serif;
+    font-family: var(--font-family);
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed; //tối ưu hóa để hiển thị form nhanh nhất

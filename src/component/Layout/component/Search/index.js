@@ -80,6 +80,17 @@ function Search() {
         setShowResult(false);
     };
 
+    // Hàm không cho nhập ký tự đầu tiên là space trong ô tìm kiếm
+    const handleChange = (e) => {
+        // đặt biến searchValueChange = giá trị nhập vào ô tìm kiếm
+        const searchValueChange = e.target.value;
+
+        // nếu searchValueChange ko bắt đầu bằng dấu cách thì cho nhập ký tự
+        if (!searchValueChange.startsWitdh('')) {
+            setSearchValue(searchValueChange);
+        }
+    };
+
     return (
         <HeadlessTippy
             // content="Tìm kiếm" placement="right"
@@ -106,7 +117,7 @@ function Search() {
                     value={searchValue}
                     placeholder="Search account and video"
                     spellCheck="false"
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleChange}
                     onFocus={() => setShowResult(true)}
                 ></input>
 
@@ -121,7 +132,7 @@ function Search() {
                 {/* Loading */}
                 {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
-                <button className={cx('search-btn')}>
+                <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
                     {/* Search */}
                     {/* <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon> */}
                     <SearchIcon />

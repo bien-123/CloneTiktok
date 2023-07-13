@@ -1,3 +1,5 @@
+import routesConfig from '~/config/routes';
+
 // Layout
 import { HeaderOnly } from '~/component/Layout';
 
@@ -10,16 +12,16 @@ import Search from '~/pages/Search';
 
 // dùng cho Router ko cần đăng nhập vẫn xem đc
 const publicRoutes = [
-    { path: '/', component: Home },
-    { path: '/following', component: Following },
+    { path: routesConfig.home, component: Home },
+    { path: routesConfig.following, component: Following },
 
     // { path: '/profile', component: Profile },
-    { path: '/@:nickname', component: Profile },
+    { path: routesConfig.profile, component: Profile },
 
     // { path: '/upload', component: Upload, layout: null },
-    { path: '/upload', component: Upload, layout: HeaderOnly },
+    { path: routesConfig.upload, component: Upload, layout: HeaderOnly },
 
-    { path: '/search', component: Search, layout: null },
+    { path: routesConfig.search, component: Search, layout: null },
 ];
 
 // dùng cho Router phải đăng nhập mới vào đc
