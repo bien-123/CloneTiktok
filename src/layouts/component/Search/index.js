@@ -2,9 +2,9 @@ import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-import { useState, useEffect, useRef, Component } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-import * as searchServices from '~/apiServices/searchServices';
+import * as searchServices from '~/services/searchService';
 
 import styles from './Search.module.scss';
 import { Wrapper as PopperWrapper } from '~/component/Popper';

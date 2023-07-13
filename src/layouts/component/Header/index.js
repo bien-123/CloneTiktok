@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -15,14 +15,14 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { Link } from 'react-router-dom';
 
-import routesConfig from '~/config/routes';
+import config from '~/config';
 import Button from '~/component/Button';
 import images from '~/assets/images';
 import styles from './Header.module.scss';
 import Menu from '~/component/Popper/Menu';
 import { MessageIcon, UploadIcon, InboxIcon } from '~/component/Icon';
 import Image from '~/component/Image';
-import Search from '~/component/Layout/component/Search';
+import Search from '~/layouts/component/Search';
 
 // dùng thư viện để chuyển object styles thành function cx
 const cx = classNames.bind(styles);
@@ -183,7 +183,7 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 {/* Logo */}
-                <Link to={routesConfig.home} className={cx('logo-link')}>
+                <Link to={config.routes.home} className={cx('logo-link')}>
                     <img src={images.logo} alt="Tiktok"></img>
                 </Link>
 
