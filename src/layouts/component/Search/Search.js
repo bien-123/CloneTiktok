@@ -18,15 +18,15 @@ function Search() {
     // tìm kiếm
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
-    const [showResult, setShowResult] = useState(true);
+    const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    // Cách thức hoạt ffoojng của debounce
+    // Cách thức hoạt ffoojng của debouncedValue
     // B1: lần đầu tiên Component chạy xong thì debounce có giá trị rỗng
     // B2: khi ngừng gõ thì sau 500ms thì nó set lại debounce và trả về giá trị mới
 
     // khi người dùng ngừng gõ 500ms thì debounce đc update bằng giá trị mới nhất của searchValue
-    const debounce = useDebounce(searchValue, 500);
+    const debouncedValue = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
 
@@ -34,7 +34,7 @@ function Search() {
         // setTimeout(() => {
         //     setSearchResult([1, 1]); //chưa có kqua tìm kiếm sẽ ẩn đi
         // }, 0);
-        if (!debounce.trim()) {
+        if (!debouncedValue.trim()) {
             setSearchResult([]); //xóa font tìm kiếm khi ko có từ khóa tìm kiếm
             return;
         }
@@ -46,7 +46,7 @@ function Search() {
         // encodeURIComponent(searchValue): mã hóa URI giá trị tìm kiếm nhập vào
 
         // Chưa dùng Axios
-        // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounce)}&type=less`)
+        // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debouncedValue)}&type=less`)
         //     .then((res) => res.json())
         //     .then((res) => {
         //         // console.log(res.data);
@@ -60,14 +60,14 @@ function Search() {
         const fetchApi = async () => {
             setLoading(true);
 
-            const result = await searchServices.search(debounce);
+            const result = await searchServices.search(debouncedValue);
 
             setSearchResult(result);
             setLoading(false);
         };
 
         fetchApi();
-    }, [debounce]); // khi giá trị tìm kiếm thay đổi thì trả về kqua tìm kiếm
+    }, [debouncedValue]); // khi giá trị tìm kiếm thay đổi thì trả về kqua tìm kiếm
 
     const handleClear = () => {
         // nếu có searchValue, khi click vào vào button clear thì nó sẽ setSearchValue về rỗng và focus vào ô Input

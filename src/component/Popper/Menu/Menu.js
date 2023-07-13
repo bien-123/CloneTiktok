@@ -41,6 +41,25 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
         });
     };
 
+    const handleBack = () => {
+        // back lại nút ban đầu
+        setHistory((prev) => prev.slice(0, prev.length - 1));
+    };
+
+    const renderResult = (attrs) => (
+        <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
+            <PopperWrapper className={cx('menu-popper')}>
+                {history.length > 1 && <Header title={current.title} onBack={handleBack} />}
+                <div className={cx('menu-body')}>{renderItems()}</div>
+            </PopperWrapper>
+        </div>
+    );
+
+    // Reset to first page
+    const handleReset = () => {
+        setHistory((prev) => prev.slice(0, 1));
+    };
+
     return (
         <Tippy
             // visible //để hiển thị menu = display:block
@@ -49,23 +68,8 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
             interactive //để tương tác đc vs kqua tìm kiếm
             delay={[0, 700]} //delay 7s sau khi hover vào sẽ ẩn đi
             placement="bottom-end"
-            render={(attrs) => (
-                <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
-                    <PopperWrapper className={cx('menu-popper')}>
-                        {history.length > 1 && (
-                            <Header
-                                title={current.title}
-                                onBack={() => {
-                                    // back lại nút ban đầu
-                                    setHistory((prev) => prev.slice(0, prev.length - 1));
-                                }}
-                            />
-                        )}
-                        <div className={cx('menu-body')}>{renderItems()}</div>
-                    </PopperWrapper>
-                </div>
-            )}
-            onHide={() => setHistory((prev) => prev.slice(0, 1))} //reset menu về menu đầu tiên
+            render={renderResult}
+            onHide={handleReset} //reset menu về menu đầu tiên
         >
             {children}
         </Tippy>

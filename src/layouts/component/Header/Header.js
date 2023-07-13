@@ -139,7 +139,7 @@ const MENU_ITEM = [
 ];
 
 function Header() {
-    const currentUser = true; //giả sử có tài khoản đăng nhập
+    const currentUser = true; //có tài khoản đăng nhập: true
 
     // Handle logic để biết đang click vào menu nào
     const handleMenuChange = (menuItem) => {
