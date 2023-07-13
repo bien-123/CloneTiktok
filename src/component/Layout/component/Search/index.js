@@ -4,6 +4,8 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import { useState, useEffect, useRef, Component } from 'react';
 
+import * as searchServices from '~/apiServices/searchServices';
+
 import styles from './Search.module.scss';
 import { Wrapper as PopperWrapper } from '~/component/Popper';
 import AccountItem from '~/component/AccountItem';
@@ -37,19 +39,34 @@ function Search() {
             return;
         }
 
-        setLoading(true);
+        // có 2 cách để gọi API khi viết js trên front-end
+        // 1. Sử dụng XMLHttpRequest (cú pháp rắc rối, khó hiểu)
+        // 2. Sử dụng fetch (phổ biến)
 
         // encodeURIComponent(searchValue): mã hóa URI giá trị tìm kiếm nhập vào
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounce)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => {
-                // console.log(res.data);
-                setSearchResult(res.data); // truyền data của API vào setSearchResult
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
+
+        // Chưa dùng Axios
+        // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounce)}&type=less`)
+        //     .then((res) => res.json())
+        //     .then((res) => {
+        //         // console.log(res.data);
+        //         setSearchResult(res.data); // truyền data của API vào setSearchResult
+        //         setLoading(false);
+        //     })
+        //     .catch(() => {
+        //         setLoading(false);
+        //     });
+
+        const fetchApi = async () => {
+            setLoading(true);
+
+            const result = await searchServices.search(debounce);
+
+            setSearchResult(result);
+            setLoading(false);
+        };
+
+        fetchApi();
     }, [debounce]); // khi giá trị tìm kiếm thay đổi thì trả về kqua tìm kiếm
 
     const handleClear = () => {
