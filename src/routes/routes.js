@@ -9,6 +9,7 @@ import Following from '~/pages/Following';
 import Profile from '~/pages/Profile';
 import Upload from '~/pages/Upload';
 import Search from '~/pages/Search';
+import Live from '~/pages/Live';
 
 // dùng cho Router ko cần đăng nhập vẫn xem đc
 const publicRoutes = [
@@ -22,6 +23,7 @@ const publicRoutes = [
     { path: config.routes.upload, component: Upload, layout: HeaderOnly },
 
     { path: config.routes.search, component: Search, layout: null },
+    { path: config.routes.live, component: Live },
 ];
 
 // dùng cho Router phải đăng nhập mới vào đc

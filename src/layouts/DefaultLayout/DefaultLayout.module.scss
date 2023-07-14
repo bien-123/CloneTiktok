@@ -6,6 +6,7 @@
 
 .container {
     width: var(--default-layout-witdh);
+    max-width: 100%; //cho sidebar hiện ra màn hình khi kích thước màn hình bị thu nhỏ
     padding: 0 var(--default-layout-horizontal-spacer);
     margin-top: var(--default-layout-header-heitht);
     display: flex;
