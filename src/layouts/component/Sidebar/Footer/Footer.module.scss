@@ -1,0 +1,36 @@
+.footer {
+    border-top: solid rgba(22, 24, 35, 0.12);
+    width: 200px;
+}
+
+.div-link {
+    margin-top: 8px;
+    width: 200px;
+}
+
+.page-link {
+    color: rgba(22, 24, 35, 0.5);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.161px;
+    display: inline-block;
+    margin-right: 6px;
+    margin-top: 5px;
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+.year {
+    color: rgba(22, 24, 35, 0.5);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.161px;
+    display: inline-block;
+    margin-right: 6px;
+    margin-top: 5px;
+}
